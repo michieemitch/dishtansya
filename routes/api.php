@@ -23,7 +23,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
 	Route::middleware('auth:api')->post('logout', 'AuthController@logout');
 
 	Route::post('register', 'RegisterController@register');
-	Route::post('order', 'OrdersController@order');
+	Route::middleware('auth:api')->post('order', 'OrdersController@order');
 
 	
 });
