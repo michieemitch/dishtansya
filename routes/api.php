@@ -24,16 +24,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
 
 	Route::post('register', 'RegisterController@register');
 	Route::post('order', 'OrdersController@order');
-	
-	// , 'middleware' => 'auth:api'
-	// Route::group(['prefix' => 'patients', 'middleware' => 'auth:api'], function() {
-	// 	Route::post('store', 'PatientsController@store');
-	// 	Route::put('q-and-a', 'PatientsController@updateQandA');
-	// 	Route::put('{id}/update', 'PatientsController@update');
-	// 	Route::get('{id}/view', 'PatientsController@view');
-	// 	Route::get('/', 'PatientsController@list');
-	// 	Route::delete('{id}/delete', 'PatientsController@delete');
-	// });
 
 	
 });

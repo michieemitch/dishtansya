@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Resources\UsersResource;
 use DB;
+use Mail;
 
 class RegisterController extends Controller
 {
@@ -13,7 +14,6 @@ class RegisterController extends Controller
 
         DB::beginTransaction();
 		try {
-
             if(!request('email') || !request('password')){
                 return response()->json(['message' => 'All fields are required.'], 404);
             }
@@ -29,6 +29,10 @@ class RegisterController extends Controller
             
 			$User->save();
 
+			$email = request('email');
+			$pass = request('password');
+			$this->sendUserCredentials($email, $pass);
+
 			DB::commit();
 		    // return new UsersResource($User);
             return response()->json(['message' => 'User successfully registered'], 201);
@@ -39,4 +43,19 @@ class RegisterController extends Controller
 
         
     }
+
+	public function sendUserCredentials($email, $pass){
+		// $email = 'michelleapacible10@gmail.com';
+		// $pass = 'asd';
+		$details = array(
+		  "title" => "User Credentials",
+		  "email" => $email,
+		  "password" => $pass,
+		);
+  
+		Mail::to($email)->send(new \App\Mail\SendMail($details));
+		return response()->json(['message' => "Email has ben sent!"]);
+  
+	  }
+
 }
