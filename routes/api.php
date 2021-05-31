@@ -25,6 +25,5 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
 	Route::post('register', 'RegisterController@register');
 	Route::middleware('auth:api')->post('order', 'OrdersController@order');
 
-	
 });
 
